@@ -7,6 +7,7 @@ import {isAuthenticated} from "../middleware/isAuthenticated.js"
 
 userRouter.post("/register", async function (req, res) {
     const { username, email, password, role } = req.body;
+    
     try {
         if (!username || !email || !password) {
             return res.status(400).json({
