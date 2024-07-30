@@ -3,11 +3,13 @@ v2.config();
 import express from "express"
 const app = express();
 import dbConnect from  "./utils/dbConnect.js";
+import cookieParser from "cookie-parser";
  
 import userRouter from "./routes/user.route.js";
 
 
 //middleware
+app.use(cookieParser())
 app.use(express.json());
 //to parse the data into the body of the request 
 app.use(express.urlencoded({extended:true}));

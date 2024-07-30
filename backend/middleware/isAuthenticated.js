@@ -2,10 +2,11 @@ import jwt from "jsonwebtoken";
 
 
 export async function isAuthenticated (req,res,next){
-    console.log(res.cookies)
+ 
+  
     const token = req.cookies.token;
     try {
-        console.log("is authenticated running")
+       
         //take the token from the cookies
         
         if(!token){
@@ -18,7 +19,6 @@ export async function isAuthenticated (req,res,next){
         const decoded = await jwt.verify(token,process.env.JWT_SECRET);
         //take the user from the decoded token
         if(!decoded){
-            console.log("error in decoded")
             return res.status(401).json({
                 status:false,
                 message:"You are not authorized to do view this page"
