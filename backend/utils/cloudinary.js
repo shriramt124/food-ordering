@@ -3,15 +3,15 @@ import { CloudinaryStorage } from 'multer-storage-cloudinary';
  
  
 cloudinary.config({
-    cloud_name: 'dfk3zo6p6',
-    api_key: '635935456921661',
-    api_secret: 'al7lNuT5N3d2wWfbzPy6iYMeZX4'
+    cloud_name: process.env.CLOUDINARY_NAME,
+    api_key:process.env.CLOUDINARY_API_KEY,
+    api_secret: process.env.CLOUDINARY_API_SECRET
 })
 const storage = new CloudinaryStorage({
     cloudinary,
     allowedFormats:['jpg','jpeg',"png"],
     params:{
-        folder:"ecom",
+        folder:"food-images",
         transformations:[{width:500,height:500,crop:"limit"}]
     }
 }) 

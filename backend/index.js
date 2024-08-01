@@ -10,7 +10,7 @@ import productRouter from "./routes/product.routes.js";
 import cartRouter from "./routes/cart.routes.js";
 
 //middleware
-
+console.log(process.env.CLOUDINARY_API_KEY)
 app.use(cookieParser())
 app.use(express.json());
 //to parse the data into the body of the request 

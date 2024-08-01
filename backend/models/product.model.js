@@ -23,7 +23,7 @@ const productSchema = new Schema({
     },
     prodImage:{
         type:String,
-        // required:true,
+        required:true,
     },
     quantity:{
         type:Number,

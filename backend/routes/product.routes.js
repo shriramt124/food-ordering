@@ -49,21 +49,23 @@ productRouter.post("/addProduct",isAuthenticated,uploader.single("prodImage"), a
                 message: "All fields are required"
             })
         }
-        if (!req.files) {
+ 
+       
+        if (!req.file) {
             return res.status(400).json({
                 status: false,
                 message: "No file uploaded"
             })
         }
         const url = req.file;
-
+         
         const product = await Product.create({
             title,
             description,
             price,
             category,
             quantity:quantity?? 1,
-            prodImage:url
+            prodImage:url.path
         })
         return res.status(201).json({
             status: true,
@@ -99,9 +101,9 @@ productRouter.get("/details/:id",async(req,res)=>{
 
 productRouter.put("/updateProduct/:id", async (req, res) => {
     const { id } = req.params;
-    const { title, description, price, category } = req.body;
+    const { title, description, price, category,quantity } = req.body;
     try {
-        if (!title || !description || !price || !category) {
+        if (!title || !description || !price || !category || !quantity) {
             return res.status(400).json({
                 status: false,
                 message: "All fields are required"
@@ -111,7 +113,8 @@ productRouter.put("/updateProduct/:id", async (req, res) => {
             title,
             description,
             price,
-            category
+            category,
+            quantity
         }, { new: true });
         return res.status(200).json({
             status: true,
