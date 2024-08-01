@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import  { useState } from "react";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router";
 
@@ -8,12 +8,12 @@ const inputClasses =
 const initialData = {
   email: "",
   password: "",
-  role:"admin"
+  role: "admin",
 };
 function Login() {
   const [formData, setFormData] = useState(initialData);
   const navigate = useNavigate();
-  const [isLoading,setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -38,19 +38,19 @@ function Login() {
     e.preventDefault();
     try {
       setIsLoading(true);
-      console.log(formData)
+      console.log(formData);
       const data = await fetchData();
       if (data.status === 500) {
         throw new Error(data.message);
       }
       setFormData(initialData);
-       setIsLoading(false);
-      toast.success("User loggedin successfull")
+      setIsLoading(false);
+      toast.success("User loggedin successfull");
       navigate("/profile");
     } catch (error) {
       console.log(error.message);
-      
-      toast.error(error.message)
+
+      toast.error(error.message);
       setIsLoading(false);
     }
   };
@@ -63,7 +63,10 @@ function Login() {
           className="w-[90%] sm:w-full m-auto hover:scale-[1.012] rounded-md transition-all duration-400  "
         />
       </div>
-      <form onSubmit={handleSubmit} className="flex flex-col  gap-4 w-full sm:w-2/4 lg:w-1/4 bg-slate-300 p-6 sm:p-6 rounded-md shadow-md shadow-slate-800">
+      <form
+        onSubmit={handleSubmit}
+        className="flex flex-col  gap-4 w-full sm:w-2/4 lg:w-1/4 bg-slate-300 p-6 sm:p-6 rounded-md shadow-md shadow-slate-800"
+      >
         <h1 className="text-center capitalize text-xl sm:text-4xl">Login</h1>
         <div className={rowclasses}>
           <label htmlFor="email">Email:</label>
@@ -89,14 +92,23 @@ function Login() {
         </div>
         <div className={rowclasses}>
           <label htmlFor="role">Role : </label>
-          <select name="role" id="role" value={formData.role} onChange={handleChange}>
-            <option name="user" id="user">user</option>
-            <option name="admin" id="admin">admin</option>
+          <select
+            name="role"
+            id="role"
+            value={formData.role}
+            onChange={handleChange}
+          >
+            <option name="user" id="user">
+              user
+            </option>
+            <option name="admin" id="admin">
+              admin
+            </option>
           </select>
         </div>
         <div className={rowclasses}>
           <button className="p-2 bg-orange-500 text-white capitalize text-xl rounded-md hover:bg-orange-800 transition-all duration-300">
-            {isLoading ? "Loading..":"Login"}
+            {isLoading ? "Loading.." : "Login"}
           </button>
         </div>
         <div className="mt-2 flex flex-col gap-2">

@@ -112,16 +112,6 @@ userRouter.get("/logout",isAuthenticated,async (req,res)=>{
 
     }
 })
-userRouter.get("/profile",isAuthenticated,async (req,res)=>{
-    try {
-        res.send("hello profile route")
-    } catch (error) {
-        return res.status(500).json({
-            status:false,
-            message:error.message,
-            stack:error.stack
-        })
-    }
-})
+ 
 
 export default userRouter;

@@ -6,6 +6,8 @@ import dbConnect from  "./utils/dbConnect.js";
 import cookieParser from "cookie-parser";
 import userRouter from "./routes/user.route.js";
 import cors from "cors"
+import productRouter from "./routes/product.routes.js";
+import cartRouter from "./routes/cart.routes.js";
 
 //middleware
 
@@ -25,7 +27,8 @@ app.get("/", (req, res) => {
 
 //routes
 app.use("/api/v1/user",userRouter);
-
+app.use("/api/v1/product",productRouter); 
+app.use("/api/v1/cart",cartRouter);
 
 
 //listent to the server
