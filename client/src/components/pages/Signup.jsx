@@ -109,7 +109,7 @@ function Signup() {
           <p>
             have an account?{" "}
             <a
-              href="/signup"
+              href="/login"
               className="text-blue-600 font-semibold capitalize"
             >
               login

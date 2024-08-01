@@ -7,6 +7,7 @@ import Signup from './components/pages/Signup'
 import Login from './components/pages/Login'
 import Profile from './components/pages/Profile'
 import  { Toaster } from 'react-hot-toast';
+import Products from './components/pages/Products'
 
 function App() {
  
@@ -19,6 +20,7 @@ function App() {
     <Route path="/signup" element={<Signup />}/>
     <Route path="/login" element={<Login />}/>
     <Route path="/profile" element={<Profile />}/>
+    <Route path="/products" element={<Products />}/>
       {/* Prouct */}
       {/* cart */}
     </Route>

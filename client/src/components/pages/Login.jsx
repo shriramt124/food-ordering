@@ -46,7 +46,7 @@ function Login() {
       setFormData(initialData);
       setIsLoading(false);
       toast.success("User loggedin successfull");
-      navigate("/profile");
+      navigate("/products");
     } catch (error) {
       console.log(error.message);
 

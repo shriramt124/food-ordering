@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 function Navbar() {
     let isLoggedin = false;
   return (
-    <nav className="flex justify-between items-center bg-slate-200 px-[50px] sm:px[100px] py-4">
+    <nav className="flex justify-between items-center bg-green-500 px-[50px] sm:px[100px] py-4">
       <Link to="/" className="text-4xl capitalize font-bold">
         Logo
       </Link>
