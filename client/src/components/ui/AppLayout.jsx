@@ -8,7 +8,7 @@ function AppLayout() {
     <div>
         {/* Navbar */}
       <Navbar />
-        <main>  
+        <main className="font-roboto">  
             <Outlet />
         </main>
         {/* Fotter */}

@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import Card from "../ui/Card";
+import { Link } from "react-router-dom";
 
 function Products() {
   const [products, setProducts] = useState([]);
@@ -29,50 +31,21 @@ function Products() {
   }
   return (
     <>
-      <div className="flex justify-between items-center px-[50px] ">
-        <p>category 1</p>
-        <p>category 1</p>
-        <p>category 1</p>
-        <p>category 1</p>
-        <p>category 1</p>
-        <p>category 1</p>
-        <p>category 1</p>
-        <p>category 1</p>
+    <div className="flex flex-col justify-center items-center gap-[50px]  my-[50px] sm:my-[100px]"> 
+      <h1 className="text-3xl sm:text-5xl  capitalize font-customFont font-medium">Our Menu</h1>
+      <div className="flex justify-center items-center gap-4 sm:gap-8 text-md sm:text-xl font-semibold ">
+        <Link className=" bg-slate-900  text-white transition-all duration-300 px-4 py-2 rounded-2xl" >All</Link>
+        <Link className="hover:bg-slate-900 hover:text-white transition-all duration-300 px-4 py-2 rounded-2xl text-black" >Food</Link>
+        <Link className="hover:bg-slate-900 hover:text-white transition-all duration-300 px-4 py-2 rounded-2xl text-black" >Dinner</Link>
+        <Link className="hover:bg-slate-900 hover:text-white transition-all duration-300 px-4 py-2 rounded-2xl text-black" >Pizza</Link>
+        <Link className="hover:bg-slate-900 hover:text-white transition-all duration-300 px-4 py-2 rounded-2xl text-black" >Burger</Link>
+        <Link className="hover:bg-slate-900 hover:text-white transition-all duration-300 px-4 py-2 rounded-2xl text-black" >Breakfast</Link>
+        </div>
       </div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 items-center justify-center gap-2 px-[10px]">
-        {products.map((product) => {
-          return (
-            <div key={product._id} className="bg-slate-100  rounded-md">
-              <div className="w-full rounded-md ">
-                <img
-                  src={product.prodImage}
-                  alt=""
-                  className="w-full rounded-md"
-                />
-              </div>
-              <div className="flex flex-col gap-2 relative capitalize p-2 ">
-                <div className="flex justify-start gap-4 items-center">
-                  <h1 className="capitalize text-xl font-semibold ">
-                    {product.title}
-                  </h1>
-                  <p className="">{product.category}</p>
-                </div>
-                <div className="flex items-center gap-4">
-                  <p className="text-xl">${product.price}</p>
-                  <p>quantity : {product.quantity}</p>
-                </div>
 
-                <div className="flex justify-between items-center ">
-                  <button className="bg-green-500 px-2 py-2 text-sm  rounded-md text-white hover:bg-orange-800 transition-all duraion-300">
-                    Details
-                  </button>
-                  <button className="bg-green-500 px-2 py-2 text-sm rounded-md text-white hover:bg-orange-800 transition-all duraion-300">
-                    Add to cart
-                  </button>
-                </div>
-              </div>
-            </div>
-          );
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 items-center justify-center gap-[30px] px-[10px] sm:px-[50px]">
+        {products.map((product) => {
+        return <Card product={product} key={product._id}/>
         })}
         <h1>hello</h1>
       </div>

@@ -7,8 +7,12 @@ export default {
   theme: {
     extend: {
       screens: {
-        "tab":'1500px'
+        "tab":'800px'
       },
+      fontFamily:{
+        'customFont':["Edu AU VIC WA NT Hand", 'cursive','sans-serif'],
+        'roboto':['"Roboto", sans-serif','sans-serif']
+      }
     },
   },
   plugins: [],
