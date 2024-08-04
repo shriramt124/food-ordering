@@ -10,10 +10,10 @@ function Navbar() {
         Logo
       </Link>
       <div className="hidden tab:flex gap-10 text-xl uppercase">
-        <Link>Home</Link>
-        <Link>Menue</Link>
-        <Link>about</Link>
-        <Link>book table</Link>
+        <Link to="/">Home</Link>
+        <Link to="/products">Menue</Link>
+        <Link  >about</Link>
+        <Link to="/book-table">book table</Link>
       </div>
       <div className="flex gap-6">
         {!isLoggedIn && (

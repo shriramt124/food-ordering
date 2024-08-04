@@ -12,7 +12,11 @@ export default {
       fontFamily:{
         'customFont':["Edu AU VIC WA NT Hand", 'cursive','sans-serif'],
         'roboto':['"Roboto", sans-serif','sans-serif']
+      },
+      backgroundImage:{
+        'hero-pattern': "url('restuarant.png')"
       }
+      
     },
   },
   plugins: [],

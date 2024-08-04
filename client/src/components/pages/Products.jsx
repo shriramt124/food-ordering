@@ -1,18 +1,29 @@
 import { useEffect, useState } from "react";
 import Card from "../ui/Card";
 import { Link } from "react-router-dom";
-
+import { useSelector } from "react-redux";
+import CartSidex from "../ui/CartSidex";
+ 
 function Products() {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(10);
-
-  async function fetchProducts(page, limit) {
+  const cart = useSelector((state) => state.cart);
+  const [category,setCategory] = useState(""); 
+  //get the cart using useSelector
+  
+ 
+  async function fetchProducts(page, limit,category="") {
     setLoading(true);
+    let url = `http://localhost:4000/api/v1/product/?page=${page}&limit=${limit}`;
+      if(category){
+        url = `http://localhost:4000/api/v1/product/?page=${page}&limit=${limit}&category=${category}`;
+      }
+    
     const res = await fetch(
-      `http://localhost:4000/api/v1/product/?page=${page}&limit=${limit}`,
+      url,
       {
         method: "GET",
         headers: {
@@ -31,8 +42,9 @@ function Products() {
   }
 
   useEffect(() => {
-    fetchProducts(page, limit);
-  }, [page, limit]);
+    fetchProducts(page, limit,category);
+  }, [page, limit,category]);
+ 
 
   const handlePageChange = (newPage) => {
     setPage(newPage);
@@ -56,25 +68,25 @@ function Products() {
       </h1>
       <div className=" my-[50px] sm:my-[70px] flex  justify-center items-center gap-[50px]   ">
         <div className="flex justify-center items-center gap-4 sm:gap-8 text-md sm:text-xl font-semibold flex-wrap">
-          <Link className=" bg-slate-900  text-white transition-all duration-300 px-4 py-2 rounded-2xl">
+          <Link  onClick={()=>{setCategory("")}}    className=" bg-slate-900  text-white transition-all duration-300 px-4 py-2 rounded-2xl">
             All
           </Link>
-          <Link className="hover:bg-slate-900 hover:text-white transition-all duration-300 px-4 py-2 rounded-2xl text-black">
-            Food
+          <Link onClick={(e)=>{setCategory(e.target.innerText.toLowerCase())}}  className="hover:bg-slate-900 hover:text-white transition-all duration-300 px-4 py-2 rounded-2xl text-black">
+            vegetable
           </Link>
-          <Link className="hover:bg-slate-900 hover:text-white transition-all duration-300 px-4 py-2 rounded-2xl text-black">
+          <Link onClick={(e)=>{setCategory(e.target.innerText.toLowerCase())}}   className="hover:bg-slate-900 hover:text-white transition-all duration-300 px-4 py-2 rounded-2xl text-black">
             Dinner
           </Link>
-          <Link className="hover:bg-slate-900 hover:text-white transition-all duration-300 px-4 py-2 rounded-2xl text-black">
+          <Link onClick={(e)=>{setCategory(e.target.innerText.toLowerCase())}}  className="hover:bg-slate-900 hover:text-white transition-all duration-300 px-4 py-2 rounded-2xl text-black">
             Pizza
           </Link>
-          <Link className="hover:bg-slate-900 hover:text-white transition-all duration-300 px-4 py-2 rounded-2xl text-black">
+          <Link onClick={(e)=>{setCategory(e.target.innerText.toLowerCase())}}  className="hover:bg-slate-900 hover:text-white transition-all duration-300 px-4 py-2 rounded-2xl text-black">
             Burger
           </Link>
-          <Link className="hover:bg-slate-900 hover:text-white transition-all duration-300 px-4 py-2 rounded-2xl text-black">
+          <Link onClick={(e)=>{setCategory(e.target.innerText.toLowerCase())}}  className="hover:bg-slate-900 hover:text-white transition-all duration-300 px-4 py-2 rounded-2xl text-black">
             Breakfast
           </Link>
-          <Link className="hover:bg-slate-900 hover:text-white transition-all duration-300 px-4 py-2 rounded-2xl text-black">
+          <Link onClick={(e)=>{setCategory(e.target.innerText.toLowerCase())}} className="hover:bg-slate-900 hover:text-white transition-all duration-300 px-4 py-2 rounded-2xl text-black">
             Pasta
           </Link>
         </div>
@@ -131,6 +143,12 @@ function Products() {
           <option value="50">50</option>
         </select>
       </div>
+     {cart.cartItems.length >0 &&(
+     
+     <div className="w-full bg-slate-800 fixed bottom-0 ">
+      <CartSidex />
+     </div>
+      )}
     </>
   );
 }

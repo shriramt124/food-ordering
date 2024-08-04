@@ -8,6 +8,8 @@ import Login from './components/pages/Login'
 import Profile from './components/pages/Profile'
 import  { Toaster } from 'react-hot-toast';
 import Products from './components/pages/Products'
+import CheckOut from './components/pages/CheckOut'
+import BookTable from './components/pages/BookTable'
 
 function App() {
  
@@ -19,8 +21,9 @@ function App() {
      <Route index path="/" element={<Home />}/>
     <Route path="/signup" element={<Signup />}/>
     <Route path="/login" element={<Login />}/>
-    <Route path="/profile" element={<Profile />}/>
+    <Route path="/checkout" element={<CheckOut />}/>
     <Route path="/products" element={<Products />}/>
+    <Route path="/book-table" element={<BookTable />}/>
       {/* Prouct */}
       {/* cart */}
     </Route>
