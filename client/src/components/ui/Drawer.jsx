@@ -11,10 +11,16 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 function Drawerui() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = React.useRef();
+  const userFound = useSelector(state => state.user)
+  const user = userFound.user;
+  const role = user?.role ;
+  const isAdmin = role === 'admin'
+  
 
   return (
     <>
@@ -47,7 +53,45 @@ function Drawerui() {
 
           <DrawerBody>
             <div className="flex flex-col gap-[40px] text-xl uppercase mt-8">
-              <p className="hover:bg-gray-600 p-4 rounded-md transition-all duration-300">
+           {isAdmin && <p className="hover:bg-gray-600 p-4 rounded-md transition-all duration-300">
+                <Link className="flex gap-4">
+                  <span>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      fill="currentColor"
+                      className="size-6"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M3 6.75A.75.75 0 0 1 3.75 6h16.5a.75.75 0 0 1 0 1.5H3.75A.75.75 0 0 1 3 6.75ZM3 12a.75.75 0 0 1 .75-.75h16.5a.75.75 0 0 1 0 1.5H3.75A.75.75 0 0 1 3 12Zm0 5.25a.75.75 0 0 1 .75-.75h16.5a.75.75 0 0 1 0 1.5H3.75a.75.75 0 0 1-.75-.75Z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                  </span>
+                  <span>Add Product</span>
+                </Link>
+              </p>}
+           {isAdmin && <p className="hover:bg-gray-600 p-4 rounded-md transition-all duration-300">
+                <Link to="/dashboard" className="flex gap-4">
+                  <span>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      fill="currentColor"
+                      className="size-6"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M3 6.75A.75.75 0 0 1 3.75 6h16.5a.75.75 0 0 1 0 1.5H3.75A.75.75 0 0 1 3 6.75ZM3 12a.75.75 0 0 1 .75-.75h16.5a.75.75 0 0 1 0 1.5H3.75A.75.75 0 0 1 3 12Zm0 5.25a.75.75 0 0 1 .75-.75h16.5a.75.75 0 0 1 0 1.5H3.75a.75.75 0 0 1-.75-.75Z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                  </span>
+                  <span>Dashboard</span>
+                </Link>
+              </p>}
+         {!isAdmin &&     <p className="hover:bg-gray-600 p-4 rounded-md transition-all duration-300">
                 <Link className="flex gap-4">
                   <span>
                     <svg
@@ -62,7 +106,7 @@ function Drawerui() {
                   </span>
                   <span>Home</span>
                 </Link>
-              </p>
+              </p>}
               <p className="hover:bg-gray-600 p-4 rounded-md transition-all duration-300">
                 <Link className="flex gap-4">
                   <span>
@@ -82,7 +126,7 @@ function Drawerui() {
                   <span>Menu</span>
                 </Link>
               </p>
-              <p className="hover:bg-gray-600 p-4 rounded-md transition-all duration-300">
+             {!isAdmin && <p className="hover:bg-gray-600 p-4 rounded-md transition-all duration-300">
                 <Link className="flex gap-4">
                   <span>
                     <svg
@@ -96,8 +140,8 @@ function Drawerui() {
                   </span>
                   <span>Cart</span>
                 </Link>
-              </p>
-              <p className="hover:bg-gray-600 p-4 rounded-md transition-all duration-300">
+              </p>}
+              {!isAdmin&& <p className="hover:bg-gray-600 p-4 rounded-md transition-all duration-300">
                 <Link className="flex gap-4">
                   <span>
                     <svg
@@ -120,26 +164,9 @@ function Drawerui() {
                   </span>
                   <span>Book a table</span>
                 </Link>
-              </p>
-              <p className="hover:bg-gray-600 p-4 rounded-md transition-all duration-300">
-                <Link className="flex gap-4">
-                  <span>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 24 24"
-                      fill="currentColor"
-                      className="size-6"
-                    >
-                      <path
-                        fillRule="evenodd"
-                        d="M7.5 3.75A1.5 1.5 0 0 0 6 5.25v13.5a1.5 1.5 0 0 0 1.5 1.5h6a1.5 1.5 0 0 0 1.5-1.5V15a.75.75 0 0 1 1.5 0v3.75a3 3 0 0 1-3 3h-6a3 3 0 0 1-3-3V5.25a3 3 0 0 1 3-3h6a3 3 0 0 1 3 3V9A.75.75 0 0 1 15 9V5.25a1.5 1.5 0 0 0-1.5-1.5h-6Zm10.72 4.72a.75.75 0 0 1 1.06 0l3 3a.75.75 0 0 1 0 1.06l-3 3a.75.75 0 1 1-1.06-1.06l1.72-1.72H9a.75.75 0 0 1 0-1.5h10.94l-1.72-1.72a.75.75 0 0 1 0-1.06Z"
-                        clipRule="evenodd"
-                      />
-                    </svg>
-                  </span>
-                  <span>Logout</span>
-                </Link>
-              </p>
+              </p>}
+              
+              
             </div>
           </DrawerBody>
 

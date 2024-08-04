@@ -10,17 +10,18 @@ import productRouter from "./routes/product.routes.js";
 import cartRouter from "./routes/cart.routes.js";
 
 //middleware
-console.log(process.env.CLOUDINARY_API_KEY)
-app.use(cookieParser())
 app.use(express.json());
+app.use(cookieParser())
 //to parse the data into the body of the request 
 app.use(express.urlencoded({extended:true}));
  
 app.use(cors({
-    origin:["http://localhost:5173"],
-    credentials:true,
-    methods:["GET","POST","PUT","DELETE","PATCH"]
-}))
+    origin: "http://localhost:5173", // Set origin as a string
+    methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
+    credentials: true,
+    allowedHeaders: ["Content-Type", "Authorization"],
+}));
+
 app.get("/", (req, res) => {
     res.send("Hello World");
 })

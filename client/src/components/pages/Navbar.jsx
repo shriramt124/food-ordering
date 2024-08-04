@@ -1,9 +1,21 @@
 import { Link } from "react-router-dom";
 
 import Drawerui from "./../ui/Drawer";
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 
 function Navbar() {
-  const isLoggedIn = true;
+  
+   const userFound = useSelector(state => state.user)
+   console.log(userFound)
+   const isLoggedIn = userFound.token !== null;
+   const user = userFound.user ?? null;
+   const role = user?.role;
+  const isAdmin = role === "admin";
+
+   
+
+
   return (
     <nav className="flex justify-between items-center bg-gradient-to-r from-black to-gray-800 text-gray-100 px-[20px] sm:px-[50px]   py-[40px] font-roboto">
       <Link to="/" className="text-4xl uppercase">
@@ -12,12 +24,14 @@ function Navbar() {
       <div className="hidden tab:flex gap-10 text-xl uppercase">
         <Link to="/">Home</Link>
         <Link to="/products">Menue</Link>
-        <Link  >about</Link>
-        <Link to="/book-table">book table</Link>
+       {!isAdmin && <Link  >about</Link>}
+      {!isAdmin &&  <Link to="/book-table">book table</Link>}
+      {isAdmin && <Link to="/dashboard">dashboard</Link>}
+      {isAdmin && <Link to="/add-product">Add Product</Link>}
       </div>
       <div className="flex gap-6">
         {!isLoggedIn && (
-          <Link>
+          <Link to="/login">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"

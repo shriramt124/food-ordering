@@ -2,7 +2,7 @@ import express from "express"
 const productRouter = express.Router()
 import Product from "../models/product.model.js"
 import { uploader } from "../utils/multer.js";
-import { isAuthenticated } from "../middleware/isAuthenticated.js";
+import { isAuthenticated, isAuthorizedUser } from "../middleware/isAuthenticated.js";
 
 productRouter.get("/", async (req, res) => {
     const { price, category, quantity, limit, page } = req.query;
@@ -40,7 +40,7 @@ productRouter.get("/", async (req, res) => {
 })
 
 
-productRouter.post("/addProduct",isAuthenticated,uploader.single("prodImage"), async (req, res) => {
+productRouter.post("/addProduct",isAuthenticated,isAuthorizedUser,uploader.single("prodImage"), async (req, res) => {
     const { title, description, price, category,quantity } = req.body;
     try {
         if (!title || !description || !price || !category) {
@@ -81,7 +81,7 @@ productRouter.post("/addProduct",isAuthenticated,uploader.single("prodImage"), a
         })
     }
 })
-productRouter.get("/details/:id",async(req,res)=>{
+productRouter.get("/details/:id",isAuthenticated,isAuthorizedUser,async(req,res)=>{
     const {id} = req.params;
     try {
         const product = await Product.findById(id);
@@ -99,7 +99,7 @@ productRouter.get("/details/:id",async(req,res)=>{
     }
 })
 
-productRouter.put("/updateProduct/:id", async (req, res) => {
+productRouter.put("/updateProduct/:id",isAuthenticated,isAuthorizedUser, async (req, res) => {
     const { id } = req.params;
     const { title, description, price, category,quantity } = req.body;
     try {
@@ -131,7 +131,7 @@ productRouter.put("/updateProduct/:id", async (req, res) => {
     }
 })
 
-productRouter.delete("/delete/:id", async (req, res) => {
+productRouter.delete("/delete/:id",isAuthenticated,isAuthorizedUser, async (req, res) => {
     const { id } = req.params;
     try {
         if (!id) {

@@ -10,6 +10,9 @@ import  { Toaster } from 'react-hot-toast';
 import Products from './components/pages/Products'
 import CheckOut from './components/pages/CheckOut'
 import BookTable from './components/pages/BookTable'
+import PrivateRoute from './components/protected/ProtectedRoute'
+import ProtectedAdminRoute from './components/protected/IsAdminProtected'
+import DashBoard from './components/admin/DashBoard'
 
 function App() {
  
@@ -23,10 +26,20 @@ function App() {
     <Route path="/login" element={<Login />}/>
     <Route path="/checkout" element={<CheckOut />}/>
     <Route path="/products" element={<Products />}/>
-    <Route path="/book-table" element={<BookTable />}/>
+     <Route path="/book-table" element={<PrivateRoute>
+      <BookTable />
+     </PrivateRoute>}/>
+   
+   
+    
       {/* Prouct */}
       {/* cart */}
     </Route>
+     
+    <Route path="/dashboard" element={<ProtectedAdminRoute>
+      <DashBoard />
+    </ProtectedAdminRoute>}/>
+    
    </Routes>
    <Toaster
   position="top-center"

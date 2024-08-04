@@ -1,6 +1,8 @@
 import  { useState } from "react";
 import toast from "react-hot-toast";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
+import { setToken, setUser } from "../../store/userSlice";
 
 const rowclasses = "flex flex-col gap-2 sm:gap-4";
 const inputClasses =
@@ -14,6 +16,9 @@ function Login() {
   const [formData, setFormData] = useState(initialData);
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
+  const userFound = useSelector(state => state.user);
+  const isAdmin = userFound?.role === 'admin';
+  const dispatch = useDispatch()
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -43,10 +48,17 @@ function Login() {
       if (data.status === 500) {
         throw new Error(data.message);
       }
+      dispatch(setUser(data.data))
+      dispatch(setToken(data.token))
       setFormData(initialData);
       setIsLoading(false);
       toast.success("User loggedin successfull");
-      navigate("/products");
+      if(isAdmin){
+        navigate("/dashboard")
+      }else{
+        navigate("/products")
+      }
+      
     } catch (error) {
       console.log(error.message);
 
