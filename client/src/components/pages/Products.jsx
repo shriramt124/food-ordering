@@ -68,25 +68,25 @@ function Products() {
       </h1>
       <div className=" my-[50px] sm:my-[70px] flex  justify-center items-center gap-[50px]   ">
         <div className="flex justify-center items-center gap-4 sm:gap-8 text-md sm:text-xl font-semibold flex-wrap">
-          <Link  onClick={()=>{setCategory("")}}    className=" bg-slate-900  text-white transition-all duration-300 px-4 py-2 rounded-2xl">
+          <Link  onClick={()=>{setCategory("")}}    className={`${!category ? "bg-slate-900 text-white  ":"bg-white text-black hover:bg-slate-900 hover:text-white"}  transition-all duration-300 px-4 py-2 rounded-2xl`}>
             All
           </Link>
-          <Link onClick={(e)=>{setCategory(e.target.innerText.toLowerCase())}}  className="hover:bg-slate-900 hover:text-white transition-all duration-300 px-4 py-2 rounded-2xl text-black">
+          <Link onClick={(e)=>{setCategory(e.target.innerText.toLowerCase())}}  className={`${category ==='vegetable' ? "bg-slate-900 text-white" :"text-black"} hover:bg-slate-900 hover:text-white transition-all duration-300 px-4 py-2 rounded-2xl  `}>
             vegetable
           </Link>
-          <Link onClick={(e)=>{setCategory(e.target.innerText.toLowerCase())}}   className="hover:bg-slate-900 hover:text-white transition-all duration-300 px-4 py-2 rounded-2xl text-black">
+          <Link onClick={(e)=>{setCategory(e.target.innerText.toLowerCase())}}    className={`${category ==='dinner' ? "bg-slate-900 text-white" :"text-black"} hover:bg-slate-900 hover:text-white transition-all duration-300 px-4 py-2 rounded-2xl  `}>
             Dinner
           </Link>
-          <Link onClick={(e)=>{setCategory(e.target.innerText.toLowerCase())}}  className="hover:bg-slate-900 hover:text-white transition-all duration-300 px-4 py-2 rounded-2xl text-black">
+          <Link onClick={(e)=>{setCategory(e.target.innerText.toLowerCase())}}   className={`${category ==='pizza' ? "bg-slate-900 text-white" :"text-black"} hover:bg-slate-900 hover:text-white transition-all duration-300 px-4 py-2 rounded-2xl  `}>
             Pizza
           </Link>
-          <Link onClick={(e)=>{setCategory(e.target.innerText.toLowerCase())}}  className="hover:bg-slate-900 hover:text-white transition-all duration-300 px-4 py-2 rounded-2xl text-black">
+          <Link onClick={(e)=>{setCategory(e.target.innerText.toLowerCase())}}  className={`${category ==='burger' ? "bg-slate-900 text-white" :"text-black"} hover:bg-slate-900 hover:text-white transition-all duration-300 px-4 py-2 rounded-2xl  `}>
             Burger
           </Link>
-          <Link onClick={(e)=>{setCategory(e.target.innerText.toLowerCase())}}  className="hover:bg-slate-900 hover:text-white transition-all duration-300 px-4 py-2 rounded-2xl text-black">
+          <Link onClick={(e)=>{setCategory(e.target.innerText.toLowerCase())}}   className={`${category ==='breakfast' ? "bg-slate-900 text-white" :"text-black"} hover:bg-slate-900 hover:text-white transition-all duration-300 px-4 py-2 rounded-2xl  `}>
             Breakfast
           </Link>
-          <Link onClick={(e)=>{setCategory(e.target.innerText.toLowerCase())}} className="hover:bg-slate-900 hover:text-white transition-all duration-300 px-4 py-2 rounded-2xl text-black">
+          <Link onClick={(e)=>{setCategory(e.target.innerText.toLowerCase())}}  className={`${category ==='pasta' ? "bg-slate-900 text-white" :"text-black"} hover:bg-slate-900 hover:text-white transition-all duration-300 px-4 py-2 rounded-2xl  `}>
             Pasta
           </Link>
         </div>
