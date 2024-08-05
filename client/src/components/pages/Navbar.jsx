@@ -27,7 +27,9 @@ function Navbar() {
        {!isAdmin && <Link  >about</Link>}
       {!isAdmin &&  <Link to="/book-table">book table</Link>}
       {isAdmin && <Link to="/dashboard">dashboard</Link>}
-      {isAdmin && <Link to="/add-product">Add Product</Link>}
+      {isAdmin && <Link to="/add-product">
+      add product
+      </Link>}
       </div>
       <div className="flex gap-6">
         {!isLoggedIn && (

@@ -12,15 +12,18 @@ import {
 } from "@chakra-ui/react";
 import { Spinner } from "@chakra-ui/react";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router";
 
 export default function UpdateProductModal({ item, updateProduct }) {
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({
     title: item.title,
     description: item.description,
     category: item.category,
     price: item.price,
   });
+   
+  const navigate = useNavigate()
 
   const [imageFile, setImageFile] = useState(null);
 
@@ -63,7 +66,7 @@ export default function UpdateProductModal({ item, updateProduct }) {
         toast.error("Your session has expired. Please login again.");
         localStorage.removeItem("token");
         localStorage.removeItem("user");
-        window.location.href = "/login";
+        navigate("/login");
         return;
       }
       throw new Error(resData.message);

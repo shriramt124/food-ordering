@@ -32,6 +32,7 @@ productRouter.get("/", async (req, res) => {
         })
     } catch (error) {
         console.log("error product route all");
+        console.log(error.message)
         return res.status(500).json({
             status: false,
             message: error.message
