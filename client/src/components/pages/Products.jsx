@@ -17,9 +17,9 @@ function Products() {
 
   async function fetchProducts(page, limit, category = "") {
     setLoading(true);
-    let url = `http://localhost:4000/api/v1/product/?page=${page}&limit=${limit}`;
+    let url = `https://food-ordering-67si.onrender.com/api/v1/product/?page=${page}&limit=${limit}`;
     if (category) {
-      url = `http://localhost:4000/api/v1/product/?page=${page}&limit=${limit}&category=${category}`;
+      url = `https://food-ordering-67si.onrender.com/api/v1/product/?page=${page}&limit=${limit}&category=${category}`;
     }
 
     const res = await fetch(url, {

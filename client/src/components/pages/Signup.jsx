@@ -21,7 +21,7 @@ function Signup() {
   };
 
   async function fetchData() {
-    const res = await fetch("http://localhost:4000/api/v1/user/register", {
+    const res = await fetch("https://food-ordering-67si.onrender.com/api/v1/user/register", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

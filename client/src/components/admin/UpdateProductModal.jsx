@@ -50,7 +50,7 @@ export default function UpdateProductModal({ item, updateProduct }) {
     }
 
     const res = await fetch(
-      `http://localhost:4000/api/v1/product/updateProduct/${item._id}`,
+      `https://food-ordering-67si.onrender.com/api/v1/product/updateProduct/${item._id}`,
       {
         method: "POST",
         headers: {

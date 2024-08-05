@@ -50,7 +50,7 @@ function DashBoard({
     const token = localStorage.getItem("token");
 
     const res = await fetch(
-      `http://localhost:4000/api/v1/product/delete/${productId}`,
+      `https://food-ordering-67si.onrender.com/api/v1/product/delete/${productId}`,
       {
         method: "DELETE",
         headers: {

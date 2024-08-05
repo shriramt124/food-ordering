@@ -15,7 +15,7 @@ function ProductManagement() {
     setLoading(true);
     try {
       const res = await fetch(
-        `http://localhost:4000/api/v1/product?page=${page}&limit=${limit}&category=${category}&sort=${sort}&order=${order}`
+        `https://food-ordering-67si.onrender.com/api/v1/product?page=${page}&limit=${limit}&category=${category}&sort=${sort}&order=${order}`
       );
       const data = await res.json();
       if (!res.ok) {

@@ -48,7 +48,7 @@ export default function AddProductModal({ updateProduct }) {
       formDataToSend.append("image", imageFile);
     }
 
-    const res = await fetch(`http://localhost:4000/api/v1/product/addProduct`, {
+    const res = await fetch(`https://food-ordering-67si.onrender.com/api/v1/product/addProduct`, {
       method: "POST",
       headers: {
         Authorization: `Bearer ${token}`,
