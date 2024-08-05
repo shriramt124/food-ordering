@@ -3,7 +3,8 @@ import Card from "../ui/Card";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import CartSidex from "../ui/CartSidex";
- 
+import { Spinner } from "@chakra-ui/react";
+
 function Products() {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -11,26 +12,22 @@ function Products() {
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(10);
   const cart = useSelector((state) => state.cart);
-  const [category,setCategory] = useState(""); 
+  const [category, setCategory] = useState("");
   //get the cart using useSelector
-  
- 
-  async function fetchProducts(page, limit,category="") {
+
+  async function fetchProducts(page, limit, category = "") {
     setLoading(true);
     let url = `http://localhost:4000/api/v1/product/?page=${page}&limit=${limit}`;
-      if(category){
-        url = `http://localhost:4000/api/v1/product/?page=${page}&limit=${limit}&category=${category}`;
-      }
-    
-    const res = await fetch(
-      url,
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
+    if (category) {
+      url = `http://localhost:4000/api/v1/product/?page=${page}&limit=${limit}&category=${category}`;
+    }
+
+    const res = await fetch(url, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
     const data = await res.json();
     if (!res.ok) {
       setError(data.message);
@@ -42,9 +39,8 @@ function Products() {
   }
 
   useEffect(() => {
-    fetchProducts(page, limit,category);
-  }, [page, limit,category]);
- 
+    fetchProducts(page, limit, category);
+  }, [page, limit, category]);
 
   const handlePageChange = (newPage) => {
     setPage(newPage);
@@ -55,7 +51,17 @@ function Products() {
   };
 
   if (loading) {
-    return <p>Products are loading</p>;
+    return (
+      <div className="flex justify-center items-start mt-[100px]">
+        <Spinner
+          thickness="8px"
+          speed="0.65s"
+          emptyColor="gray.200"
+          color="blue.500"
+          size="xl"
+        />
+      </div>
+    );
   }
   if (!products) {
     return <p>No products found</p>;
@@ -68,25 +74,80 @@ function Products() {
       </h1>
       <div className=" my-[50px] sm:my-[70px] flex  justify-center items-center gap-[50px]   ">
         <div className="flex justify-center items-center gap-4 sm:gap-8 text-md sm:text-xl font-semibold flex-wrap">
-          <Link  onClick={()=>{setCategory("")}}    className={`${!category ? "bg-slate-900 text-white  ":"bg-white text-black hover:bg-slate-900 hover:text-white"}  transition-all duration-300 px-4 py-2 rounded-2xl`}>
+          <Link
+            onClick={() => {
+              setCategory("");
+            }}
+            className={`${
+              !category
+                ? "bg-slate-900 text-white  "
+                : "bg-white text-black hover:bg-slate-900 hover:text-white"
+            }  transition-all duration-300 px-4 py-2 rounded-2xl`}
+          >
             All
           </Link>
-          <Link onClick={(e)=>{setCategory(e.target.innerText.toLowerCase())}}  className={`${category ==='vegetable' ? "bg-slate-900 text-white" :"text-black"} hover:bg-slate-900 hover:text-white transition-all duration-300 px-4 py-2 rounded-2xl  `}>
+          <Link
+            onClick={(e) => {
+              setCategory(e.target.innerText.toLowerCase());
+            }}
+            className={`${
+              category === "vegetable"
+                ? "bg-slate-900 text-white"
+                : "text-black"
+            } hover:bg-slate-900 hover:text-white transition-all duration-300 px-4 py-2 rounded-2xl  `}
+          >
             vegetable
           </Link>
-          <Link onClick={(e)=>{setCategory(e.target.innerText.toLowerCase())}}    className={`${category ==='dinner' ? "bg-slate-900 text-white" :"text-black"} hover:bg-slate-900 hover:text-white transition-all duration-300 px-4 py-2 rounded-2xl  `}>
+          <Link
+            onClick={(e) => {
+              setCategory(e.target.innerText.toLowerCase());
+            }}
+            className={`${
+              category === "dinner" ? "bg-slate-900 text-white" : "text-black"
+            } hover:bg-slate-900 hover:text-white transition-all duration-300 px-4 py-2 rounded-2xl  `}
+          >
             Dinner
           </Link>
-          <Link onClick={(e)=>{setCategory(e.target.innerText.toLowerCase())}}   className={`${category ==='pizza' ? "bg-slate-900 text-white" :"text-black"} hover:bg-slate-900 hover:text-white transition-all duration-300 px-4 py-2 rounded-2xl  `}>
+          <Link
+            onClick={(e) => {
+              setCategory(e.target.innerText.toLowerCase());
+            }}
+            className={`${
+              category === "pizza" ? "bg-slate-900 text-white" : "text-black"
+            } hover:bg-slate-900 hover:text-white transition-all duration-300 px-4 py-2 rounded-2xl  `}
+          >
             Pizza
           </Link>
-          <Link onClick={(e)=>{setCategory(e.target.innerText.toLowerCase())}}  className={`${category ==='burger' ? "bg-slate-900 text-white" :"text-black"} hover:bg-slate-900 hover:text-white transition-all duration-300 px-4 py-2 rounded-2xl  `}>
+          <Link
+            onClick={(e) => {
+              setCategory(e.target.innerText.toLowerCase());
+            }}
+            className={`${
+              category === "burger" ? "bg-slate-900 text-white" : "text-black"
+            } hover:bg-slate-900 hover:text-white transition-all duration-300 px-4 py-2 rounded-2xl  `}
+          >
             Burger
           </Link>
-          <Link onClick={(e)=>{setCategory(e.target.innerText.toLowerCase())}}   className={`${category ==='breakfast' ? "bg-slate-900 text-white" :"text-black"} hover:bg-slate-900 hover:text-white transition-all duration-300 px-4 py-2 rounded-2xl  `}>
+          <Link
+            onClick={(e) => {
+              setCategory(e.target.innerText.toLowerCase());
+            }}
+            className={`${
+              category === "breakfast"
+                ? "bg-slate-900 text-white"
+                : "text-black"
+            } hover:bg-slate-900 hover:text-white transition-all duration-300 px-4 py-2 rounded-2xl  `}
+          >
             Breakfast
           </Link>
-          <Link onClick={(e)=>{setCategory(e.target.innerText.toLowerCase())}}  className={`${category ==='pasta' ? "bg-slate-900 text-white" :"text-black"} hover:bg-slate-900 hover:text-white transition-all duration-300 px-4 py-2 rounded-2xl  `}>
+          <Link
+            onClick={(e) => {
+              setCategory(e.target.innerText.toLowerCase());
+            }}
+            className={`${
+              category === "pasta" ? "bg-slate-900 text-white" : "text-black"
+            } hover:bg-slate-900 hover:text-white transition-all duration-300 px-4 py-2 rounded-2xl  `}
+          >
             Pasta
           </Link>
         </div>
@@ -94,9 +155,9 @@ function Products() {
 
       <div className="m-auto relative grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4  gap-[30px] px-[10px] sm:px-[50px] w-full ">
         {products.length === 0 ? (
-          <p className="text-3xl text-orange-700 font-semibold mx-auto">
+          <div className="mx-auto text-3xl text-orange-700 font-semibold  flex justify-center items-center w-full text-center">
             No products found on this page
-          </p>
+          </div>
         ) : (
           products.map((product) => {
             return <Card product={product} key={product._id} />;
@@ -143,11 +204,10 @@ function Products() {
           <option value="50">50</option>
         </select>
       </div>
-     {cart.cartItems.length >0 &&(
-     
-     <div className="w-full bg-slate-800 fixed bottom-0 ">
-      <CartSidex />
-     </div>
+      {cart.cartItems.length > 0 && (
+        <div className="w-full bg-slate-800 fixed bottom-0 ">
+          <CartSidex />
+        </div>
       )}
     </>
   );

@@ -3,8 +3,9 @@ import { Link } from "react-router-dom";
 import Drawerui from "./../ui/Drawer";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import AddProductModal from "../admin/AddProduct";
 
-function Navbar() {
+function Navbar({updateProduct}) {
   
    const userFound = useSelector(state => state.user)
    console.log(userFound)
@@ -27,9 +28,9 @@ function Navbar() {
        {!isAdmin && <Link  >about</Link>}
       {!isAdmin &&  <Link to="/book-table">book table</Link>}
       {isAdmin && <Link to="/dashboard">dashboard</Link>}
-      {isAdmin && <Link to="/add-product">
-      add product
-      </Link>}
+      {isAdmin &&  
+      (<AddProductModal updateProduct={updateProduct}/>)
+      }
       </div>
       <div className="flex gap-6">
         {!isLoggedIn && (

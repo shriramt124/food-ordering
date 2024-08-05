@@ -1,8 +1,8 @@
-import { Link } from "react-router-dom";
-import Drawerui from "../ui/Drawer";
+ 
+ 
 import Navbar from "../pages/Navbar";
 import UpdateProductModal from "./UpdateProductModal";
-import { Spinner } from "@chakra-ui/react";
+ 
 import Skeletonui from "../ui/Skeleton";
 import { formatCurrency } from "./../../utils/helpers";
 import toast from "react-hot-toast";
@@ -94,7 +94,7 @@ function DashBoard({
 
   return (
     <div className="w-full">
-      <Navbar />
+      <Navbar updateProduct={updateProduct} />
       {loading ? (
         <div className="px-[20px] sm:px-[50px] lg:px-[70px]">
           <Skeletonui />

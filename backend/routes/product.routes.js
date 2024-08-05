@@ -6,9 +6,9 @@ import { isAuthenticated, isAuthorizedUser } from "../middleware/isAuthenticated
  
 
 productRouter.get("/", async (req, res) => {
-    const { price, category, quantity, limit, page } = req.query;
+    const { price, category, quantity, limit, page, sort, order } = req.query;
     try {
-        let query = {}
+        let query = {};
         if (price) {
             query.price = { $gt: parseInt(price) };
         }
@@ -18,10 +18,19 @@ productRouter.get("/", async (req, res) => {
         if (quantity) {
             query.quantity = { $gte: parseInt(quantity) };
         }
+
         const limitValue = parseInt(limit) || 10;
         const pageValue = parseInt(page) || 1;
         const skipValue = (pageValue - 1) * limitValue;
+
+        let sortQuery = { createdAt: -1 }; // Default sorting by createdAt in descending order
+        if (sort) {
+            sortQuery = {};
+            sortQuery[sort] = order === 'asc' ? 1 : -1;
+        }
+
         const products = await Product.find(query)
+            .sort(sortQuery)
             .skip(skipValue)
             .limit(limitValue);
 
@@ -29,21 +38,22 @@ productRouter.get("/", async (req, res) => {
             status: true,
             message: "Products fetched successfully",
             data: products
-        })
+        });
     } catch (error) {
         console.log("error product route all");
-        console.log(error.message)
+        console.log(error.message);
         return res.status(500).json({
             status: false,
             message: error.message
-        })
+        });
     }
+});
 
-})
 
-
-productRouter.post("/addProduct",isAuthenticated,isAuthorizedUser,uploader.single("prodImage"), async (req, res) => {
+productRouter.post("/addProduct",uploader.single("image"),isAuthenticated,isAuthorizedUser, async (req, res) => {
     const { title, description, price, category,quantity } = req.body;
+    console.log(req.file,"from the add product")
+    console.log(req.body)
     try {
         if (!title || !description || !price || !category) {
             return res.status(400).json({
@@ -51,7 +61,6 @@ productRouter.post("/addProduct",isAuthenticated,isAuthorizedUser,uploader.singl
                 message: "All fields are required"
             })
         }
- 
        
         if (!req.file) {
             return res.status(400).json({
