@@ -3,6 +3,7 @@ import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 import { setToken, setUser } from "../../store/userSlice";
+import { Link } from "react-router-dom";
 
 const rowclasses = "flex flex-col gap-2 sm:gap-4";
 const inputClasses =
@@ -128,20 +129,20 @@ function Login() {
         <div className="mt-2 flex flex-col gap-2">
           <p>
             Dont have an account?{" "}
-            <a
+            <Link
               href="/signup"
               className="text-blue-600 font-semibold capitalize"
             >
               Signup
-            </a>
+            </Link>
           </p>
           <p>
-            <a
+            <Link
               href="/forgot-password"
               className="text-blue-600 text-md font-semibold capitalize "
             >
               forgot password
-            </a>
+            </Link>
           </p>
         </div>
       </form>
