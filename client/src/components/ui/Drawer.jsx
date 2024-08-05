@@ -12,8 +12,9 @@ import {
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
+import AddProductModal from "../admin/AddProduct";
 
-function Drawerui() {
+function Drawerui({updateProduct}) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = React.useRef();
   const userFound = useSelector(state => state.user)
@@ -54,7 +55,7 @@ function Drawerui() {
           <DrawerBody>
             <div className="flex flex-col gap-[40px] text-xl uppercase mt-8">
            {isAdmin && <p className="hover:bg-gray-600 p-4 rounded-md transition-all duration-300">
-                <Link className="flex gap-4">
+                <p className="flex gap-4">
                   <span>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -69,8 +70,8 @@ function Drawerui() {
                       />
                     </svg>
                   </span>
-                  <span>Add Product</span>
-                </Link>
+                  <span><AddProductModal updateProduct={updateProduct}/></span>
+                </p>
               </p>}
            {isAdmin && <p className="hover:bg-gray-600 p-4 rounded-md transition-all duration-300">
                 <Link to="/dashboard" className="flex gap-4">
@@ -92,7 +93,7 @@ function Drawerui() {
                 </Link>
               </p>}
          {!isAdmin &&     <p className="hover:bg-gray-600 p-4 rounded-md transition-all duration-300">
-                <Link className="flex gap-4">
+                <Link to="/" className="flex gap-4">
                   <span>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -108,7 +109,7 @@ function Drawerui() {
                 </Link>
               </p>}
               <p className="hover:bg-gray-600 p-4 rounded-md transition-all duration-300">
-                <Link className="flex gap-4">
+                <Link to="/products" className="flex gap-4">
                   <span>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -142,7 +143,7 @@ function Drawerui() {
                 </Link>
               </p>}
               {!isAdmin&& <p className="hover:bg-gray-600 p-4 rounded-md transition-all duration-300">
-                <Link className="flex gap-4">
+                <Link to="/book-table" className="flex gap-4">
                   <span>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"

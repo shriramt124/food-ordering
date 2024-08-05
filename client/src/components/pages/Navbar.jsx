@@ -81,7 +81,7 @@ function Navbar({updateProduct}) {
           </svg>
         </Link>}
         <p className="tab:hidden">
-          <Drawerui />
+          <Drawerui updateProduct={updateProduct}/>
         </p>
       </div>
     </nav>
