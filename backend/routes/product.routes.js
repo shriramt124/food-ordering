@@ -119,7 +119,7 @@ productRouter.post("/updateProduct/:id",uploader.single("image"),isAuthenticated
             description,
             price,
             category,
-            prodImage:req.file.path
+            prodImage:req.file?.path
         }, { new: true });
 
         if (!product) {

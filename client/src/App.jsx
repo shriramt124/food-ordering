@@ -13,6 +13,7 @@ import BookTable from './components/pages/BookTable'
 import PrivateRoute from './components/protected/ProtectedRoute'
 import ProtectedAdminRoute from './components/protected/IsAdminProtected'
 import DashBoard from './components/admin/DashBoard'
+import ProductManagement from './components/admin/ProductManagement'
 
 function App() {
  
@@ -37,7 +38,7 @@ function App() {
     </Route>
      
     <Route path="/dashboard" element={<ProtectedAdminRoute>
-      <DashBoard />
+      <ProductManagement />
     </ProtectedAdminRoute>}/>
     
    </Routes>
