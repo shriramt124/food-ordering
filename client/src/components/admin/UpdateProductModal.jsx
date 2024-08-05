@@ -1,5 +1,4 @@
-// UpdateProductModal.js
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Modal,
   ModalOverlay,
@@ -11,64 +10,86 @@ import {
   Button,
   useDisclosure,
 } from "@chakra-ui/react";
-import ImagePicker from "../ui/ImagePicker";
 import toast from "react-hot-toast";
 
 export default function UpdateProductModal({ item }) {
-    console.log(item._id,"from item update product")
-  const [formData, setFormdata] = useState({
+  let [formData, setFormData] = useState({
     title: item.title,
     description: item.description,
     category: item.category,
     price: item.price,
-    image: item.prodImage,
   });
-  function handleChangeFormData(e) {
-    setFormdata({ ...formData, [e.target.name]: e.target.value });
-  }
-  async function submitData(data){
-    const res = await fetch(`http://localhost:4000/api/v1/product/updateProduct/${item._id}`,{
-      method:"PUT",
-      credentials:'include',
-        headers:{
-            "Content-Type":"application/json"
-        }, 
-      body:JSON.stringify({...formData,id:item._id})
-    })
-    const resdata = await res.json();
-    if(!res.ok){
-        throw new Error(resdata.message);
-    }
-    console.log(resdata);
-    return resdata;
-  }
-  async function handleSubmit(e){
-   e.preventDefault();
-    try {
-      const data = await submitData(formData);
-       if(data.status === 500){
-        throw new Error(data.message);
-       }
-       toast.success("Product updated successfully");
-       onClose();
-      
-    } catch (error) {
-        console.log(error.message);
-        toast.error(error.message);
-    }
 
+  const [imageFile, setImageFile] = useState(null);
+
+  function handleChangeFormData(e) {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+     
+  }
+
+  function handleSelectImage(e) {
+    const file = e.target.files[0];
+    setImageFile(file);
+    
+   
+
+  }
+
+  async function submitData() {
+ 
+    const token = localStorage.getItem("token");
+
+    const formDataToSend = new FormData();
+    formDataToSend.append("title", formData.title);
+    formDataToSend.append("description", formData.description);
+    formDataToSend.append("category", formData.category);
+    formDataToSend.append("price", formData.price);
+    
+    if (imageFile) {
+      formDataToSend.append("image", imageFile);
+    }
+    
+    const res = await fetch(`http://localhost:4000/api/v1/product/updateProduct/${item._id}`, {
+      method: "POST",
+      
+      headers: {
+        Authorization: `Bearer ${token}`,
+        
+       
+      },
+      body:formDataToSend,
+    });
+        
+
+    const resData = await res.json();
+    if (!res.ok) {
+      throw new Error(resData.message);
+    }
+    console.log(resData);
+    return resData;
+  }
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+    console.log(formData,"form submit data")
+    try {
+      const data = await submitData();
+      if (data.status === 500) {
+        throw new Error(data.message);
+      }
+    
+      toast.success("Product updated successfully");
+      onClose();
+    } catch (error) {
+      console.log(error.message);
+      toast.error(error.message);
+    }
   }
 
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [imagePath, setImagePath] = useState(null); // State to store the image path
+  useEffect(()=>{
 
-  const handleImageSelect = (path) => {
-    
-    setImagePath(path);
-  
-
-  };
-
+  },[])
   return (
     <>
       <p onClick={onOpen}>
@@ -95,13 +116,16 @@ export default function UpdateProductModal({ item }) {
           <ModalHeader>Update Product</ModalHeader>
           <ModalCloseButton />
           <ModalBody pb={6}>
-            <form onSubmit={handleSubmit} className="flex flex-col gap-4 sm:gap-4">
+            <form
+              onSubmit={handleSubmit}
+              className="flex flex-col gap-4 sm:gap-4"
+            >
               <div>
-                <ImagePicker onImageSelect={handleImageSelect} />
+                <input id="fileInput" type="file" accept="image/*" name="image" onChange={handleSelectImage} />
               </div>
               <div className="flex flex-col gap-2">
                 <label className="capitalize text-xl font-bold" htmlFor="title">
-                  title
+                  Title
                 </label>
                 <input
                   className="p-4 border-2 border-slate-900 rounded-md outline-none focus:outline-none capitalize active:bg-orange-600 active:text-white transition-all duration-300"
@@ -112,11 +136,8 @@ export default function UpdateProductModal({ item }) {
                 />
               </div>
               <div className="flex flex-col gap-2">
-                <label
-                  className="capitalize text-xl font-bold"
-                  htmlFor="description"
-                >
-                  description
+                <label className="capitalize text-xl font-bold" htmlFor="description">
+                  Description
                 </label>
                 <textarea
                   cols="15"
@@ -128,11 +149,8 @@ export default function UpdateProductModal({ item }) {
                 />
               </div>
               <div className="flex flex-col gap-2">
-                <label
-                  className="capitalize text-xl font-bold"
-                  htmlFor="category"
-                >
-                  category
+                <label className="capitalize text-xl font-bold" htmlFor="category">
+                  Category
                 </label>
                 <select
                   className="bg-orange-500 p-2 rounded-md text-white capitalize"
@@ -156,17 +174,17 @@ export default function UpdateProductModal({ item }) {
                 </label>
                 <input
                   className="text-xl border-2 border-slate-900 rounded-md p-2"
-                  type="text"
+                  type="number"
                   value={formData.price}
                   onChange={handleChangeFormData}
                   name="price"
                 />
               </div>
-              <button>submit</button>
+              <button type="submit">Submit</button>
             </form>
           </ModalBody>
           <ModalFooter>
-            <Button colorScheme="blue" mr={3}>
+            <Button colorScheme="blue" mr={3} onClick={handleSubmit}>
               Save
             </Button>
             <Button onClick={onClose}>Cancel</Button>

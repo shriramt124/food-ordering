@@ -1,41 +1,39 @@
 import jwt from "jsonwebtoken";
 import User from "../models/user.model.js";
 
-export async function isAuthenticated(req, res, next) {
-
-
-    const token = req.cookies.token;
-    console.log(req.cookies,"from isauthencticated")
-    console.log(token,"from authenticated user")
+export const isAuthenticated = async (req, res, next) => {
+    //get the token from authorization header 
+    const token = req.header('Authorization')?.replace('Bearer ', '');
     try {
+        if (!token) return res.status(401).json({
+            status: false,
+            message: "Access Token is required"
+        })
 
-        //take the token from the cookies
-
-        if (!token) {
-            return res.status(401).json({
-                status: false,
-                message: "unauthorized user"
-            })
-        }
-        //verify the token
-        const decoded = await jwt.verify(token, process.env.JWT_SECRET);
-        //take the user from the decoded token
-        if (!decoded) {
-            return res.status(401).json({
-                status: false,
-                message: "You are not authorized to do view this page"
-            })
-        }
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+      
         req.user = decoded.id;
-       console.log(req.user)
         next();
 
     } catch (error) {
-        console.log("error in is authenticated")
-        return res.status(500).json({
+        if (error instanceof jwt.TokenExpiredError) {
+            return res.status(401).json({
+                status: false,
+                message: "access token is  expired",
+                code: "AccessTokenExpired"
+            })
+        }
+        else if (error instanceof jwt.JsonWebTokenError) {
+            return res.status(401).json({
+                staus: false,
+                message: "access token is  invalid",
+                code: "AccessTokenInvalid"
+            })
+        }
+
+        return res.status(401).json({
             status: false,
-            message: error.message,
-            stack: error.stack
+            message: error.message
         })
     }
 }

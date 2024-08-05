@@ -89,10 +89,10 @@ function DashBoard() {
               Sort by:
               <select
                 className="bg-orange-500 rounded-xl px-2 py-1 text-slate-100 focus:outline-none active:bg-slate-900"
-                value={category}
+               
                 onChange={(e) => handleCategoryChange(e.target.value)}
                 value={sort}
-                onChange={(e) => handleSortChange(e.target.value)}
+                
               >
                 <option value="createdAt">Created At</option>
                 <option value="price">Price</option>
@@ -103,10 +103,10 @@ function DashBoard() {
               Order:
               <select
                 className="bg-orange-500 rounded-xl px-2 py-1 text-slate-100 focus:outline-none active:bg-slate-900"
-                value={category}
+                 
                 onChange={(e) => handleCategoryChange(e.target.value)}
                 value={order}
-                onChange={(e) => handleOrderChange(e.target.value)}
+              
               >
                 <option value="asc">Ascending</option>
                 <option value="desc">Descending</option>

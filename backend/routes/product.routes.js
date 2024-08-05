@@ -3,6 +3,7 @@ const productRouter = express.Router()
 import Product from "../models/product.model.js"
 import { uploader } from "../utils/multer.js";
 import { isAuthenticated, isAuthorizedUser } from "../middleware/isAuthenticated.js";
+ 
 
 productRouter.get("/", async (req, res) => {
     const { price, category, quantity, limit, page } = req.query;
@@ -99,11 +100,15 @@ productRouter.get("/details/:id",isAuthenticated,isAuthorizedUser,async(req,res)
     }
 })
 
-productRouter.put("/updateProduct/:id",isAuthenticated,isAuthorizedUser, async (req, res) => {
+productRouter.post("/updateProduct/:id",uploader.single("image"),isAuthenticated,isAuthorizedUser, async (req, res) => {
     const { id } = req.params;
-    const { title, description, price, category,quantity } = req.body;
+ 
+    const { title, description, price, category } = req.body;
+    console.log(req.file)
+     
+
     try {
-        if (!title || !description || !price || !category || !quantity) {
+        if (!title || !description || !price || !category) {
             return res.status(400).json({
                 status: false,
                 message: "All fields are required"
@@ -114,8 +119,16 @@ productRouter.put("/updateProduct/:id",isAuthenticated,isAuthorizedUser, async (
             description,
             price,
             category,
-            quantity
+            prodImage:req.file.path
         }, { new: true });
+
+        if (!product) {
+            return res.status(404).json({
+                status: false,
+                message: "Product not found"
+            })
+        }
+        
         return res.status(200).json({
             status: true,
             message: "Product updated successfully",
