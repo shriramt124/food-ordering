@@ -6,10 +6,10 @@ import Slider from "../ui/Slider";
 function Home() {
   return (
     <div>
-      <div className="bg-homebg  bg-cover bg-no-repeat  bg-center   h-[50vh] lg:h-screen text-white px-[20px] sm:px-[50px] py-[50px]">
-        <div className="w-full sm:w-2/4  flex flex-col gap-4 sm:gap-14 mt-[20px]">
-          <h1 className="text-3xl sm:text-5xl font-customFont">Food order</h1>
-          <p className="text-xl">
+      <div className="bg-homebg  bg-cover bg-no-repeat  bg-center   h-[70vh] lg:h-screen text-white px-[20px] sm:px-[50px] py-[50px]">
+        <div className="w-full sm:w-2/4  flex flex-col gap-4 sm:gap-14 mt-[30px]">
+          <h1 className="text-2xl sm:text-5xl font-customFont">Food order</h1>
+          <p className="text-md sm:text-xl">
             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptate
             dolorum illo illum quasi, nostrum quisquam delectus eaque, eligendi
             quaerat recusandae aliquid quas esse! Cumque magnam veritatis

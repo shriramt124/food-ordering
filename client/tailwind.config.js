@@ -15,7 +15,7 @@ export default {
       },
       backgroundImage:{
         'hero-pattern': "url('restuarant.png')",
-        'homebg':"url('hero-bg.jpg')",
+        "homebg":"url('herobg.jpg')",
         "burgur-bg":"url('burgur.png')"
       }
       

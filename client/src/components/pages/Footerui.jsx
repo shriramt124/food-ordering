@@ -3,7 +3,7 @@ import React from 'react';
 const Footerui = () => {
   return (
     <footer className="bg-gray-800 text-white py-8">
-      <div className="container mx-auto flex justify-between items-center">
+      <div className="container mx-auto flex flex-col sm:flex-row gap-4 justify-between items-center">
         {/* Contact Us Section */}
         <div className="text-center">
           <h2 className="text-xl mb-2">Contact Us</h2>
