@@ -130,7 +130,7 @@ function Login() {
           <p>
             Dont have an account?{" "}
             <Link
-              href="/signup"
+              to="/signup"
               className="text-blue-600 font-semibold capitalize"
             >
               Signup
@@ -138,7 +138,7 @@ function Login() {
           </p>
           <p>
             <Link
-              href="/forgot-password"
+              to="/forgot-password"
               className="text-blue-600 text-md font-semibold capitalize "
             >
               forgot password
