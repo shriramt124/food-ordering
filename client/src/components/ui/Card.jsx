@@ -1,15 +1,20 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../../store/cartSlice";
-import store from "../../store/store";
+ 
 import toast from "react-hot-toast";
 
 function Card({ product }) {
-  const dispatch = useDispatch();
+  const userFound = useSelector(state => state.user)
+  const token = userFound.token;
 
+  const dispatch = useDispatch();
   const handleAddToCart = () => {
+    if(!token){
+      toast.error("Login to add item in cart")
+      return;
+    }
     dispatch(addToCart(product));
     toast.success("item added to cart")
-    
   };
   
   return (

@@ -14,7 +14,9 @@ export default {
         'roboto':['"Roboto", sans-serif','sans-serif']
       },
       backgroundImage:{
-        'hero-pattern': "url('restuarant.png')"
+        'hero-pattern': "url('restuarant.png')",
+        'homebg':"url('hero-bg.jpg')",
+        "burgur-bg":"url('burgur.png')"
       }
       
     },

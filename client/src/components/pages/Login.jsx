@@ -53,6 +53,7 @@ function Login() {
       setFormData(initialData);
       setIsLoading(false);
       localStorage.setItem("token",data.token)
+      localStorage.setItem("user",data.data)
       toast.success("User loggedin successfull");
       if(isAdmin){
         navigate("/dashboard")

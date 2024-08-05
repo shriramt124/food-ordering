@@ -23,6 +23,10 @@ const cartSlice = createSlice({
             state.totalPrice += action.payload.price;
             state.totalQuantity += 1;
             console.log(state.totalPrice,"from add to cart")
+            localStorage.setItem("cart",state.cartItems);
+            localStorage.setItem("totalPrice",state.totalPrice)
+            localStorage.setItem("totalQuantity",state.totalQuantity);
+            
 
 
         },
