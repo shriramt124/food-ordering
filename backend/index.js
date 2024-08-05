@@ -14,7 +14,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser())
 const corsOptions = {
-    origin: 'http://localhost:5173', // specify your frontend's origin
+    origin: 'https://tastehouse.netlify.app/', // specify your frontend's origin
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     credentials: true,
 };
